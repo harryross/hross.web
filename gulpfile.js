@@ -8,6 +8,8 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var lint = require('gulp-eslint'); //Lint our js files
+var sass = require('gulp-sass');
+var babelify = require('babelify');
 
 
 var config = {
@@ -17,12 +19,9 @@ var config = {
 		html: './src/*.html',
 		js: './src/**/*.js',
 		images: './src/images/*',
-		css: [
-			'src/dist/semantic.min.css'
-		],
+		css: './sass/**/*.scss',
 		dist: './dist',
-		mainJs: './src/main.js',
-		semanticJs: './src/dist/semantic.min.js'
+		mainJs: './src/main.js'
 	}
 }
 
@@ -50,6 +49,7 @@ gulp.task('html', function() {
 
 gulp.task('js', function() {
 	browserify(config.paths.mainJs)
+		.transform(babelify)
 		.transform(reactify)
 		.bundle()
 		.on('error', console.error.bind(console))
@@ -61,12 +61,8 @@ gulp.task('js', function() {
 gulp.task('css', function() {
 	gulp.src(config.paths.css)
 		.pipe(concat('bundle.css'))
+		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest(config.paths.dist + '/css'));
-});
-
-gulp.task('semantic', function() {
-	gulp.src(config.paths.semanticJs)
-		.pipe(gulp.dest(config.paths.dist + '/scripts'));
 });
 
 gulp.task('images', function() {
@@ -83,6 +79,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
 	gulp.watch(config.paths.js, ['js', 'lint']);
+	gulp.watch(config.paths.css, ['css']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'semantic', 'images', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);

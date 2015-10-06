@@ -3,11 +3,11 @@
 var React = require('react');
 
 var AuthorForm = React.createClass({
-  render: function() [
+  render: function() {
     return (
-
+      <p>sadasdsad</p>
     );
-  ]
+  }
 });
 
 module.exports = AuthorForm;

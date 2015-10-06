@@ -31,7 +31,9 @@ function drainQueue() {
         currentQueue = queue;
         queue = [];
         while (++queueIndex < len) {
-            currentQueue[queueIndex].run();
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
         }
         queueIndex = -1;
         len = queue.length;
@@ -83,7 +85,6 @@ process.binding = function (name) {
     throw new Error('process.binding is not supported');
 };
 
-// TODO(shtylman)
 process.cwd = function () { return '/' };
 process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
@@ -44339,30 +44340,30 @@ var authors = require('./authorData').authors;
 var _ = require('lodash');
 
 //This would be performed on the server in a real app. Just stubbing in.
-var _generateId = function(author) {
+var _generateId = function _generateId(author) {
 	return author.firstName.toLowerCase() + '-' + author.lastName.toLowerCase();
 };
 
-var _clone = function(item) {
+var _clone = function _clone(item) {
 	return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
 };
 
 var AuthorApi = {
-	getAllAuthors: function() {
+	getAllAuthors: function getAllAuthors() {
 		return _clone(authors);
 	},
 
-	getAuthorById: function(id) {
-		var author = _.find(authors, {id: id});
+	getAuthorById: function getAuthorById(id) {
+		var author = _.find(authors, { id: id });
 		return _clone(author);
 	},
 
-	saveAuthor: function(author) {
+	saveAuthor: function saveAuthor(author) {
 		//pretend an ajax call to web api is made here
 		console.log('Pretend this just saved the author to the DB via AJAX call...');
 
 		if (author.id) {
-			var existingAuthorIndex = _.indexOf(authors, _.find(authors, {id: author.id}));
+			var existingAuthorIndex = _.indexOf(authors, _.find(authors, { id: author.id }));
 			authors.splice(existingAuthorIndex, 1, author);
 		} else {
 			//Just simulating creation here.
@@ -44375,134 +44376,235 @@ var AuthorApi = {
 		return _clone(author);
 	},
 
-	deleteAuthor: function(id) {
+	deleteAuthor: function deleteAuthor(id) {
 		console.log('Pretend this just deleted the author from the DB via an AJAX call...');
-		_.remove(authors, { id: id});
+		_.remove(authors, { id: id });
 	}
 };
 
 module.exports = AuthorApi;
+
+
 },{"./authorData":199,"lodash":3}],199:[function(require,module,exports){
+'use strict';
+
 module.exports = {
-	authors:
-	[
-		{
-			id: 'cory-house',
-			firstName: 'Cory',
-			lastName: 'House'
-		},
-		{
-			id: 'scott-allen',
-			firstName: 'Scott',
-			lastName: 'Allen'
-		},
-		{
-			id: 'dan-wahlin',
-			firstName: 'Dan',
-			lastName: 'Wahlin'
-		}
-	]
+	authors: [{
+		id: 'cory-house',
+		firstName: 'Cory',
+		lastName: 'House'
+	}, {
+		id: 'scott-allen',
+		firstName: 'Scott',
+		lastName: 'Allen'
+	}, {
+		id: 'dan-wahlin',
+		firstName: 'Dan',
+		lastName: 'Wahlin'
+	}]
 };
+
+
 },{}],200:[function(require,module,exports){
 "use strict";
 var React = require('react');
 
-var About = React.createClass({displayName: "About",
+var About = React.createClass({
+    displayName: "About",
+
     statics: {
-      willTransitionTo: function(transition, params, query, callback) {
-        // if(!confirm('Are you sure you want to read a page that\'s this boring?')) {
-        //   transition.about();
-        // } else {
-        //   callback();
-        // }
-        callback();
-      },
-      willTransitionFrom: function(transition, component) {
-        // if(!confirm('Are you sure you want to leavew a page that\'s this exciting?')) {
-        //   transition.about();
-        // }
-      }
+        willTransitionTo: function willTransitionTo(transition, params, query, callback) {
+            // if(!confirm('Are you sure you want to read a page that\'s this boring?')) {
+            //   transition.about();
+            // } else {
+            //   callback();
+            // }
+            callback();
+        },
+        willTransitionFrom: function willTransitionFrom(transition, component) {
+            // if(!confirm('Are you sure you want to leavew a page that\'s this exciting?')) {
+            //   transition.about();
+            // }
+        }
     },
-    render: function() {
-      return (
-          React.createElement("div", null, 
-              React.createElement("h1", null, "About"), 
-              React.createElement("p", null, 
-                  "This application uses the follow technologies", 
-                  React.createElement("ul", null, 
-                      React.createElement("li", null, "React"), 
-                      React.createElement("li", null, "React Router"), 
-                      React.createElement("li", null, "Flux"), 
-                      React.createElement("li", null, "Node"), 
-                      React.createElement("li", null, "Gulp"), 
-                      React.createElement("li", null, "Browserify"), 
-                      React.createElement("li", null, "Semantic UI")
-                  )
-              )
-          )
-      );
-    }
-});
-
-module.exports = About;
-},{"react":197}],201:[function(require,module,exports){
-/*eslint-disable strict*/
-
-var React = require('react');
-var Header = require('./common/header');
-var RouteHandler = require('react-router').RouteHandler;
-$ = jQuery = require('jquery');
-
-var App = React.createClass({displayName: "App",
-    render: function() {
-        return (
-            React.createElement("div", null, 
-                React.createElement(Header, null), 
-                React.createElement("div", {className: "ui container"}, 
-                  React.createElement(RouteHandler, null)
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "h1",
+                null,
+                "About"
+            ),
+            React.createElement(
+                "p",
+                null,
+                "This application uses the follow technologies",
+                React.createElement(
+                    "ul",
+                    null,
+                    React.createElement(
+                        "li",
+                        null,
+                        "React"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "React Router"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "Flux"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "Node"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "Gulp"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "Browserify"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        "Semantic UI"
+                    )
                 )
             )
         );
     }
 });
 
+module.exports = About;
+
+
+},{"react":197}],201:[function(require,module,exports){
+/*eslint-disable strict*/
+
+'use strict';
+
+var React = require('react');
+var Header = require('./common/header');
+var RouteHandler = require('react-router').RouteHandler;
+$ = jQuery = require('jquery');
+
+var App = React.createClass({
+    displayName: 'App',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(Header, null),
+            React.createElement(
+                'div',
+                { className: 'ui container' },
+                React.createElement(RouteHandler, null)
+            )
+        );
+    }
+});
+
 module.exports = App;
-},{"./common/header":205,"jquery":2,"react":197,"react-router":28}],202:[function(require,module,exports){
+
+
+},{"./common/header":206,"jquery":2,"react":197,"react-router":28}],202:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
 
-var AuthorList = React.createClass({displayName: "AuthorList",
+var AuthorForm = React.createClass({
+  displayName: "AuthorForm",
+
+  render: function render() {
+    return React.createElement(
+      "p",
+      null,
+      "sadasdsad"
+    );
+  }
+});
+
+module.exports = AuthorForm;
+
+
+},{"react":197}],203:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+
+var AuthorList = React.createClass({
+  displayName: "AuthorList",
+
   propTypes: {
     authors: React.PropTypes.array.isRequired
   },
-  render: function() {
-    var createAuthorRow = function(author){
-      return (
-        React.createElement("tr", {key: author.id}, 
-          React.createElement("td", null, React.createElement("a", {href: "/#authors/" + author.id}, author.id)), 
-          React.createElement("td", null, author.firstName, " ", author.lastName)
+  render: function render() {
+    var createAuthorRow = function createAuthorRow(author) {
+      return React.createElement(
+        "tr",
+        { key: author.id },
+        React.createElement(
+          "td",
+          null,
+          React.createElement(
+            "a",
+            { href: "/#authors/" + author.id },
+            author.id
+          )
+        ),
+        React.createElement(
+          "td",
+          null,
+          author.firstName,
+          " ",
+          author.lastName
         )
       );
     };
-    return (
-        React.createElement("table", {className: "ui celled table"}, 
-          React.createElement("thead", null, 
-            React.createElement("tr", null, 
-              React.createElement("th", null, "ID"), 
-              React.createElement("th", null, "Name")
-            )
-          ), 
-          React.createElement("tbody", null, 
-            this.props.authors.map(createAuthorRow, this)
+    return React.createElement(
+      "table",
+      { className: "ui celled table" },
+      React.createElement(
+        "thead",
+        null,
+        React.createElement(
+          "tr",
+          null,
+          React.createElement(
+            "th",
+            null,
+            "ID"
+          ),
+          React.createElement(
+            "th",
+            null,
+            "Name"
           )
         )
+      ),
+      React.createElement(
+        "tbody",
+        null,
+        this.props.authors.map(createAuthorRow, this)
+      )
     );
   }
 });
 
 module.exports = AuthorList;
-},{"react":197}],203:[function(require,module,exports){
+
+
+},{"react":197}],204:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -44511,118 +44613,192 @@ var Link = require('react-router').Link;
 var AuthorApi = require('../../api/authorApi');
 var AuthorList = require('./authorList');
 
+var Authors = React.createClass({
+  displayName: 'Authors',
 
-var Authors = React.createClass({displayName: "Authors",
-  getInitialState: function() {
+  getInitialState: function getInitialState() {
     return {
       authors: []
     };
   },
 
-  componentDidMount: function() {
-    if(this.isMounted){
+  componentDidMount: function componentDidMount() {
+    if (this.isMounted) {
       this.setState({ authors: AuthorApi.getAllAuthors() });
     }
   },
-  render: function() {
-    return (
-      React.createElement("div", null, 
-        React.createElement("h1", null, "Authors"), 
-        React.createElement(Link, {to: "addAuthor", class: "ui primary button"}, "Add Author"), 
-        React.createElement(AuthorList, {authors: this.state.authors})
-      )
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        'Authors'
+      ),
+      React.createElement(
+        Link,
+        { to: 'addAuthor', 'class': 'ui primary button' },
+        'Add Author'
+      ),
+      React.createElement(AuthorList, { authors: this.state.authors })
     );
   }
 });
 
 module.exports = Authors;
-},{"../../api/authorApi":198,"./authorList":202,"react":197,"react-router":28}],204:[function(require,module,exports){
-"use strict"
+
+
+},{"../../api/authorApi":198,"./authorList":203,"react":197,"react-router":28}],205:[function(require,module,exports){
+"use strict";
 
 var React = require('react');
+var AuthorForm = require('./authorForm');
 
-var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
-  render: function() {
-    return (
-      React.createElement("h1", null, "Manage Authors")
+var ManageAuthorPage = React.createClass({
+  displayName: 'ManageAuthorPage',
+
+  render: function render() {
+    return React.createElement(
+      'h1',
+      null,
+      'Manage Authors'
     );
   }
 });
 
 module.exports = ManageAuthorPage;
-},{"react":197}],205:[function(require,module,exports){
+
+
+},{"./authorForm":202,"react":197}],206:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
+var Header = React.createClass({
+    displayName: 'Header',
 
-var Header = React.createClass({displayName: "Header",
-    render: function() {
-        return (
-               React.createElement("div", {className: "ui stackable menu"}, 
-                    React.createElement(Link, {className: "item", to: "app"}, 
-                        React.createElement("img", {src: "images/nav-logo.svg"})
-                    ), 
-                    React.createElement(Link, {to: "app", className: "item"}, "Home"), 
-                    React.createElement(Link, {to: "authors", className: "item"}, "Authors"), 
-                    React.createElement(Link, {to: "about", className: "item"}, "About")
-               )
-        );
-    }
-});
-
-module.exports = Header;
-},{"react":197,"react-router":28}],206:[function(require,module,exports){
-"use strict";
-
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-
-var Home = React.createClass({displayName: "Home",
-    render: function() {
-        return (
-            React.createElement("div", null, 
-                React.createElement("h1", null, "Xero Push Administration"), 
-                React.createElement("p", null, "React, React Router, and flux for ultra-responsive web app."), 
-                React.createElement(Link, {to: "about", className: "ui primary button"}, "Learn More")
+    render: function render() {
+        return React.createElement(
+            'div',
+            { className: 'ui stackable menu' },
+            React.createElement(
+                Link,
+                { className: 'item', to: 'app' },
+                React.createElement('img', { src: 'images/nav-logo.svg' })
+            ),
+            React.createElement(
+                Link,
+                { to: 'app', className: 'item' },
+                'Home'
+            ),
+            React.createElement(
+                Link,
+                { to: 'authors', className: 'item' },
+                'Authors'
+            ),
+            React.createElement(
+                Link,
+                { to: 'about', className: 'item' },
+                'About'
             )
         );
     }
 });
 
+module.exports = Header;
+
+
+},{"react":197,"react-router":28}],207:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
+
+var Home = React.createClass({
+    displayName: 'Home',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'h1',
+                null,
+                'Xero Push Administration'
+            ),
+            React.createElement(
+                'p',
+                null,
+                'React, React Router, and flux for ultra-responsive web app.'
+            ),
+            React.createElement(
+                Link,
+                { to: 'about', className: 'ui primary button' },
+                'Learn More'
+            )
+        );
+    }
+});
 
 module.exports = Home;
-},{"react":197,"react-router":28}],207:[function(require,module,exports){
+
+
+},{"react":197,"react-router":28}],208:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
 var Link = require('react-router').Link;
 
-var NotFoundPage = React.createClass({displayName: "NotFoundPage",
-  render: function() {
-    return (
-      React.createElement("div", null, 
-      React.createElement("h1", null, "Page Not Found"), 
-      React.createElement("p", null, "Whoops! Sorry, nothing to see here."), 
-      React.createElement("p", null, React.createElement(Link, {to: "app"}, "Back to home"))
-    )
+var NotFoundPage = React.createClass({
+  displayName: 'NotFoundPage',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        'Page Not Found'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'Whoops! Sorry, nothing to see here.'
+      ),
+      React.createElement(
+        'p',
+        null,
+        React.createElement(
+          Link,
+          { to: 'app' },
+          'Back to home'
+        )
+      )
     );
   }
 });
 
 module.exports = NotFoundPage;
-},{"react":197,"react-router":28}],208:[function(require,module,exports){
+
+
+},{"react":197,"react-router":28}],209:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
 
-Router.run(routes, function(Handler){
+Router.run(routes, function (Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
-},{"./routes":209,"react":197,"react-router":28}],209:[function(require,module,exports){
+
+
+},{"./routes":210,"react":197,"react-router":28}],210:[function(require,module,exports){
+'use strict';
+
 "user strict";
 
 var React = require('react');
@@ -44633,19 +44809,21 @@ var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
-var routes = (
-  React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
-    React.createElement(DefaultRoute, {handler: require('./components/homepage')}), 
-    React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
-    React.createElement(Route, {name: "addAuthor", path: "author", handler: require('./components/authors/manageAuthorPage')}), 
-    React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
-    React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage')}), 
-    React.createElement(Redirect, {from: "about-us", to: "about"}), 
-    React.createElement(Redirect, {from: "awthurs", to: "authors"}), 
-    React.createElement(Redirect, {from: "about/*", to: "about"}), 
-    React.createElement(Redirect, {from: "about*", to: "about"})
-  )
+var routes = React.createElement(
+  Route,
+  { name: 'app', path: '/', handler: require('./components/app') },
+  React.createElement(DefaultRoute, { handler: require('./components/homepage') }),
+  React.createElement(Route, { name: 'authors', handler: require('./components/authors/authorPage') }),
+  React.createElement(Route, { name: 'addAuthor', path: 'author', handler: require('./components/authors/manageAuthorPage') }),
+  React.createElement(Route, { name: 'about', handler: require('./components/about/aboutPage') }),
+  React.createElement(NotFoundRoute, { handler: require('./components/notFoundPage') }),
+  React.createElement(Redirect, { from: 'about-us', to: 'about' }),
+  React.createElement(Redirect, { from: 'awthurs', to: 'authors' }),
+  React.createElement(Redirect, { from: 'about/*', to: 'about' }),
+  React.createElement(Redirect, { from: 'about*', to: 'about' })
 );
 
 module.exports = routes;
-},{"./components/about/aboutPage":200,"./components/app":201,"./components/authors/authorPage":203,"./components/authors/manageAuthorPage":204,"./components/homepage":206,"./components/notFoundPage":207,"react":197,"react-router":28}]},{},[208]);
+
+
+},{"./components/about/aboutPage":200,"./components/app":201,"./components/authors/authorPage":204,"./components/authors/manageAuthorPage":205,"./components/homepage":207,"./components/notFoundPage":208,"react":197,"react-router":28}]},{},[209]);
