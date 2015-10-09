@@ -13,7 +13,6 @@ general:
 dependencies:
   override:
     - npm install
-    - bundle install
     - sudo pip install awscli # install from a different package manager
 
 deployment:
