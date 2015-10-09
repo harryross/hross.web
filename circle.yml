@@ -11,6 +11,10 @@ general:
     - /dist
 
 dependencies:
+  pre:
+    - npm install gulp -g
+    - npm install gulp-cli -g
+
   override:
     - npm install
     - sudo pip install awscli # install from a different package manager
