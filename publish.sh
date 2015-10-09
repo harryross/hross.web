@@ -3,4 +3,4 @@
 # PROFILE=${AWS_PROFILE:-$DEFAULT}
 BUCKET=hross.io
 DIR=dist/
-aws  s3  sync $DIR s3://$BUCKET --delete
+aws  s3  sync $DIR s3://$BUCKET --delete --region ap-southeast-2
