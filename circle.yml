@@ -4,10 +4,6 @@ machine:
 
   node:
     version: 0.12.7
-dependencies:
-    override:
-        - bundle install
-        - sudo pip install awscli
 
 deployment:
   staging:
