@@ -12,7 +12,7 @@ general:
 
 dependencies:
   override:
-    - gulp build
+    - npm install
     - bundle install
     - sudo pip install awscli # install from a different package manager
 
