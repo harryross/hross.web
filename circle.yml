@@ -1,0 +1,24 @@
+machine:
+  timezone:
+    Pacific/Auckland
+
+  node:
+    version: 0.12.7
+dependencies:
+    override:
+        - bundle install
+        - sudo pip install awscli
+
+deployment:
+  staging:
+    branch: master
+    codedeploy:
+      appname-1234:
+        application_root: /
+        region: ap-southeast-2
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: hross.io
+            key_pattern: hross-{BRANCH}-{SHORT_COMMIT}
+        deployment_group: my-deployment-group
