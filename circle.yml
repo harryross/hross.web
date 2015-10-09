@@ -5,16 +5,34 @@ machine:
   node:
     version: 0.12.7
 
+
+general:
+  artifacts:
+    - /dist
+
+dependencies:
+  override:
+    - gulp build
+    - bundle install
+    - sudo pip install awscli # install from a different package manager
+
 deployment:
-  staging:
+    aws:
     branch: master
-    codedeploy:
-      hross.io:
-        application_root: /dist
-        region: ap-southeast-2
-        revision_location:
-          revision_type: S3
-          s3_location:
-            bucket: hross.io
-            key_pattern: hross-{BRANCH}-{SHORT_COMMIT}
-        deployment_group: my-deployment-group
+        commands:
+        - gulp build
+        - /bin/bash publish.sh
+
+# deployment:
+#   staging:
+#     branch: master
+#     codedeploy:
+#       hross.io:
+#         application_root: /dist
+#         region: ap-southeast-2
+#         revision_location:
+#           revision_type: S3
+#           s3_location:
+#             bucket: hross.io
+#             key_pattern: hross-{BRANCH}-{SHORT_COMMIT}
+#         deployment_group: my-deployment-group
