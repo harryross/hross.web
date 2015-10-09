@@ -12,6 +12,7 @@ general:
 
 dependencies:
   pre:
+    - npm prune && npm install
     - npm install gulp -g
     - npm install gulp-cli -g
 
