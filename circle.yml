@@ -9,8 +9,8 @@ deployment:
   staging:
     branch: master
     codedeploy:
-      appname-1234:
-        application_root: /
+      hross.io:
+        application_root: /dist
         region: ap-southeast-2
         revision_location:
           revision_type: S3
