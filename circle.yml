@@ -20,8 +20,8 @@ deployment:
     aws:
     branch: master
         commands:
-        - gulp build
-        - /bin/bash publish.sh
+            - gulp build
+            - /bin/bash publish.sh
 
 # deployment:
 #   staging:
