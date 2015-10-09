@@ -18,10 +18,10 @@ dependencies:
 
 deployment:
     aws:
-    branch: master
-        commands:
-            - gulp build
-            - /bin/bash publish.sh
+      branch: master
+      commands:
+          - gulp build
+          - /bin/bash publish.sh
 
 # deployment:
 #   staging:
