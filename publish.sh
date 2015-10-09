@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DEFAULT="companyprofile"
+DEFAULT="circle_ci"
 PROFILE=${AWS_PROFILE:-$DEFAULT}
 BUCKET=hross.io
 DIR=dist/
