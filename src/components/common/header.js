@@ -8,14 +8,14 @@ var Header = React.createClass({
     render: function() {
         return (
                  <ul className="nav">
-                   <li className="menubar-item">
-                     <Link to="home">Home</Link>
+                   <li>
+                     <Link to="home" className="menubar-item">Home</Link>
                     </li>
-                    <li className="menubar-item">
-                      <Link to="authors">Authors</Link>
+                    <li>
+                      <Link to="authors" className="menubar-item">Authors</Link>
                     </li>
-                    <li className="menubar-item">
-                      <Link to="about">About</Link>
+                    <li>
+                      <Link to="about" className="menubar-item">About</Link>
                     </li>
                   </ul>
         );
