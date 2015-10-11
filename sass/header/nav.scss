@@ -8,32 +8,28 @@
   justify-content: flex-start;
   padding: 0 0;
   margin: 0;
-  > li {
-    display: inline-block;
-    position: relative;
-  }
 }
 
 .menubar-item {
-  color: $nav-text-colour;
   display: block;
   padding: 10px 14px;
-  text-decoration: none;
-  font-family: $primary-font;
-  &:hover {
-    color: red;
+  position: relative;
+
+  > a {
+    color: $nav-text-colour;
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    font-family: $primary-font;
+    &:hover {
+      color: $nav-text-colour-hover;
+    }
+    &.active {
+      color: $nav-text-colour-selected;
+      border-bottom: 2px
+    }
   }
   &.active {
-    color: green;
+    border-bottom: 2px solid $nav-text-colour-selected;
   }
 }
-
-// .menubar-item.active {
-//   color: green;
-//   display: block;
-//   padding: 10px 14px;
-//   text-decoration: none;
-//   &:hover {
-//     color: red;
-//   }
-// }
