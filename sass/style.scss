@@ -1,8 +1,17 @@
 @import './partials/variables'; // colors, fonts etc...
 
 @import './header/nav'; // Naviagtion menu
+@import './body/body'; //Main content
 
 
 body {
+  font: {
+    size: 100%;
+    family: $primary-font; // variables inside partials > _variables.scss
+  }
   margin: 0;
+}
+
+a {
+	text-decoration: none;
 }

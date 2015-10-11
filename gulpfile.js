@@ -22,7 +22,7 @@ var config = {
 		css: './sass/style.scss',
 		dist: './dist',
 		mainJs: './src/main.js',
-		cssWatch: '/sass/**/*.scss'
+		cssWatch: './sass/**/*.scss'
 	}
 }
 

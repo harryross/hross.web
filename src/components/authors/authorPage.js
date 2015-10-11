@@ -21,7 +21,7 @@ var Authors = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="main-content">
         <h1>Authors</h1>
         <Link to="addAuthor" class="ui primary button">Add Author</Link>
         <AuthorList authors={this.state.authors} />

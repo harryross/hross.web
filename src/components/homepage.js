@@ -7,8 +7,8 @@ var Link = Router.Link;
 var Home = React.createClass({
     render: function() {
         return (
-            <div>
-                <h1>Hi James</h1>
+            <div className="main-content">
+                <h1>Hi James, what do you think?</h1>
                 <p>This is currently just a playground for me</p>
                 <Link to="about" className="ui primary button">Learn More</Link>
             </div>
