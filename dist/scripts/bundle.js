@@ -35460,29 +35460,41 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 var Header = React.createClass({
-    displayName: 'Header',
+  displayName: 'Header',
 
-    render: function render() {
-        return React.createElement(
-            'div',
-            { className: 'nav' },
-            React.createElement(
-                Link,
-                { to: 'app' },
-                'Home'
-            ),
-            React.createElement(
-                Link,
-                { to: 'authors' },
-                'Authors'
-            ),
-            React.createElement(
-                Link,
-                { to: 'about' },
-                'About'
-            )
-        );
-    }
+  render: function render() {
+    return React.createElement(
+      'ul',
+      { className: 'nav' },
+      React.createElement(
+        'li',
+        null,
+        React.createElement(
+          Link,
+          { to: 'app', className: 'menubar-item' },
+          'Home'
+        )
+      ),
+      React.createElement(
+        'li',
+        null,
+        React.createElement(
+          Link,
+          { to: 'authors', className: 'menubar-item' },
+          'Authors'
+        )
+      ),
+      React.createElement(
+        'li',
+        null,
+        React.createElement(
+          Link,
+          { to: 'about', className: 'menubar-item' },
+          'About'
+        )
+      )
+    );
+  }
 });
 
 module.exports = Header;
@@ -35505,7 +35517,7 @@ var Home = React.createClass({
             React.createElement(
                 'h1',
                 null,
-                'This is my website'
+                'Hi James'
             ),
             React.createElement(
                 'p',

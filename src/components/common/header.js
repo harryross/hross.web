@@ -7,11 +7,17 @@ var Link = Router.Link;
 var Header = React.createClass({
     render: function() {
         return (
-               <div className="nav">
-                    <Link to="app">Home</Link>
-                    <Link to="authors">Authors</Link>
-                    <Link to="about">About</Link>
-               </div>
+                 <ul className="nav">
+                   <li>
+                     <Link to="app" className="menubar-item">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="authors" className="menubar-item">Authors</Link>
+                    </li>
+                    <li>
+                      <Link to="about" className="menubar-item">About</Link>
+                    </li>
+                  </ul>
         );
     }
 });
