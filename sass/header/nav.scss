@@ -1,12 +1,13 @@
 .nav {
   list-style-type: none;
-  background: blue;
+  background: $nav-colour;
   font-size: 20px;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
   padding: 0 0;
+  margin: 0;
   > li {
     display: inline-block;
     position: relative;
@@ -14,21 +15,25 @@
 }
 
 .menubar-item {
-  color: black;
+  color: $nav-text-colour;
   display: block;
   padding: 10px 14px;
   text-decoration: none;
+  font-family: $primary-font;
   &:hover {
     color: red;
   }
-}
-
-.menubar-item.active {
-  color: green;
-  display: block;
-  padding: 10px 14px;
-  text-decoration: none;
-  &:hover {
-    color: orange;
+  &.active {
+    color: green;
   }
 }
+
+// .menubar-item.active {
+//   color: green;
+//   display: block;
+//   padding: 10px 14px;
+//   text-decoration: none;
+//   &:hover {
+//     color: red;
+//   }
+// }
