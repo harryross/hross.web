@@ -19,9 +19,6 @@ var Header = React.createClass({
                     <li>
                       <Link to="about" className="menubar-item">About</Link>
                     </li>
-                    <li>
-                      <Dropdown />
-                    </li>
                   </ul>
         );
     }
