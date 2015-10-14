@@ -1,0 +1,68 @@
+@mixin animation($content) {
+  animation: $content;
+  -moz-animation: $content;
+  -webkit-animation: $content;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} { @content; }
+  @-moz-keyframes #{$name} { @content; }
+  @-webkit-keyframes #{$name} { @content; }
+}
+
+@mixin ul-nostyle {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dropdown {
+	a {
+		text-decoration: none;
+	}
+
+	[data-toggle="dropdown"] {
+		position: relative;
+		display: block;
+		color: white;
+		background: $blue;
+		padding: 10px;
+
+	}
+	.icon-arrow {
+		position: absolute;
+		display: block;
+		font-size: 0.7em;
+		color: #fff;
+		top: 14px;
+		right: 10px;
+
+	&:before {
+			content: '\25BC';
+		}
+	}
+  .dropdown-menu {
+		max-height: 0;
+		overflow: hidden;
+		@include ul-nostyle;
+
+		li {
+			padding: 0;
+
+			a {
+				display: block;
+				color: darken($gray, 50%);
+				background: $gray;
+				padding: 10px 10px;
+			}
+		}
+	}
+
+	.show {
+		display: block;
+		max-height: 9999px;
+	}
+  .hide {
+  max-height: 0;
+  }
+}
