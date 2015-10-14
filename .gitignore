@@ -30,3 +30,4 @@ node_modules
 
 #build directory to be ignored
 dist
+.sass-cache

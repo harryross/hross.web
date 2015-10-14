@@ -1,7 +1,11 @@
 @import './partials/variables'; // colors, fonts etc...
+@import './partials/text';
 
 @import './header/nav'; // Naviagtion menu
 @import './body/body'; //Main content
+@import './dropdown/dropdown'; //Main content
+
+
 
 
 body {
@@ -12,6 +16,17 @@ body {
   margin: 0;
 }
 
+*, *:before, *:after {
+	-webkit-border-sizing: border-box;
+	-moz-border-sizing: border-box;
+	border-sizing: border-box;
+}
+
 a {
 	text-decoration: none;
+}
+
+.container {
+	width: 350px;
+	margin: 50px auto;
 }

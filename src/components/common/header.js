@@ -1,4 +1,6 @@
 "use strict";
+import Dropdown from '../common/dropdown'
+
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
@@ -16,6 +18,9 @@ var Header = React.createClass({
                     </li>
                     <li>
                       <Link to="about" className="menubar-item">About</Link>
+                    </li>
+                    <li>
+                      <Dropdown />
                     </li>
                   </ul>
         );
